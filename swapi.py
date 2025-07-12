@@ -6,7 +6,6 @@ from pathlib import Path
 def save_sw_data():
     path = Path("data")
     path.mkdir(exist_ok=True)
-    # sw_requester_instance = SWRequester('https://swapi.py4e.com/api')
     sw_requester_instance = SWRequester('https://swapi.dev/api')
     categories = list(sw_requester_instance.get_sw_categories())
     for category in categories:
@@ -41,13 +40,3 @@ class SWRequester(APIRequester):
 
     def get_sw_info(self, sw_type):
         return self.get(f'{sw_type}/').text
-        # return self.get(sw_type).text
-
-
-if __name__ == "__main__":
-    save_sw_data()
-    # sw_requester = SWRequester('https://swapi.py4e.com/')
-    # categories = list(sw_requester.get_sw_categories('/api/'))
-    # print(categories[1])
-    # category_response = sw_requester.get_sw_info('/api/' + categories[1])
-    # print(category_response)
