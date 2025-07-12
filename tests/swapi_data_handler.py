@@ -36,7 +36,7 @@ class SWRequester(APIRequester):
     def save_sw_data(self):
         sw_requester_instance = SWRequester()
         path = "data"
-        os.makedirs(path, exist_ok=True) 
+        os.makedirs(path, exist_ok=True)
         categories = sw_requester_instance.get_sw_categories()
 
         for category in categories:
