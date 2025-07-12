@@ -6,15 +6,14 @@ from pathlib import Path
 def save_sw_data():
     path = Path("data")
     path.mkdir(exist_ok=True)
-    sw_requester_instance = SWRequester('https://swapi.py4e.com/api')
-    # sw_requester_instance = SWRequester('https://swapi.dev/api')
+    # sw_requester_instance = SWRequester('https://swapi.py4e.com/api')
+    sw_requester_instance = SWRequester('https://swapi.dev/api')
     categories = list(sw_requester_instance.get_sw_categories())
     for category in categories:
-        file = f'{category}.txt'
         response = sw_requester_instance.get_sw_info(category)
-        print(response)
-        with open(f"{path}/{file}", "w") as file:
-            file.write(f'{response} \n')
+        file_path = f"data/{category}.txt"
+        with open(file_path, "w") as file:
+            file.write(response)
 
 
 class APIRequester:
@@ -42,6 +41,7 @@ class SWRequester(APIRequester):
 
     def get_sw_info(self, sw_type):
         return self.get(f'{sw_type}/').text
+        # return self.get(sw_type).text
 
 
 if __name__ == "__main__":
