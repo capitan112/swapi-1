@@ -3,18 +3,6 @@ from urllib.parse import urljoin
 from pathlib import Path
 
 
-def save_sw_data():
-    path = Path("data")
-    path.mkdir(exist_ok=True)
-    sw_requester_instance = SWRequester('https://swapi.dev/api')
-    categories = list(sw_requester_instance.get_sw_categories())
-    for category in categories:
-        response = sw_requester_instance.get_sw_info(category)
-        file_path = f"data/{category}.txt"
-        with open(file_path, "w") as file:
-            file.write(response)
-
-
 class APIRequester:
     def __init__(self, base_url):
         self.base_url = base_url
@@ -40,3 +28,15 @@ class SWRequester(APIRequester):
 
     def get_sw_info(self, sw_type):
         return self.get(f'{sw_type}/').text
+
+
+def save_sw_data():
+    path = Path("data")
+    path.mkdir(exist_ok=True)
+    sw_requester_instance = SWRequester('https://swapi.dev/api')
+    categories = list(sw_requester_instance.get_sw_categories())
+    for category in categories:
+        response = sw_requester_instance.get_sw_info(category)
+        file_path = f"data/{category}.txt"
+        with open(file_path, "w") as file:
+            file.write(response)
