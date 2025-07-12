@@ -1,7 +1,9 @@
 import requests
 import os
 
+
 class APIRequester:
+
     def __init__(self, base_url):
         self.base_url = base_url
 
@@ -17,7 +19,7 @@ class APIRequester:
 
 
 class SWRequester(APIRequester):
-    
+
     def __init__(self, base_url='https://swapi.py4e.com/api/'):
         super().__init__(base_url)
 
@@ -30,7 +32,7 @@ class SWRequester(APIRequester):
             category_url = self.base_url + f'/{category}/'
             response = requests.get(category_url, verify=False)
             return response.text
-        
+
     def save_sw_data(self):
         sw_requester_instance = SWRequester()
         path = "data"
@@ -45,7 +47,6 @@ class SWRequester(APIRequester):
                 file.write(f'{response} \n')
 
 
-      
 if __name__ == "__main__":
     sw_requester = SWRequester('https://swapi.dev/api/')
     categories = sw_requester.get_sw_categories()
